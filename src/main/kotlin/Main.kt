@@ -13,6 +13,10 @@ abstract class PizzaCity(
     var romanPizzaCount = 0
     var sicilianPizzaCount = 0
     var tyroleanPizzaCount = 0
+    var shownCheck = 0
+    var discountSum = 0.0
+    var soldCoffee = 0
+    var coffeeProfit = 0.0
 
     abstract fun neapolitanPizzaSale()
     abstract fun romanPizzaSale()
@@ -24,8 +28,12 @@ abstract class PizzaCity(
         println("Neapolitan sold: $neapolitanPizzaCount")
         println("Tyrolean pizza sold: $tyroleanPizzaCount")
 
-        println("General profit : ${neapolitanPizzaCount * neapolitanPizzaPrice + romanPizzaCount * romanPizzaPrice +
-                sicilianPizzaCount * sicilianPizzaPrice + tyroleanPizzaCount * tyroleanPizzaPrice}")
+        println("General profit $: ${neapolitanPizzaCount * neapolitanPizzaPrice + romanPizzaCount * romanPizzaPrice +
+                sicilianPizzaCount * sicilianPizzaPrice + tyroleanPizzaCount * tyroleanPizzaPrice + coffeeProfit - discountSum }")
+        println("Check shown: $shownCheck")
+        println("Discount Sum: $discountSum")
+        println("Coffee sold: $soldCoffee")
+        println("Coffee profit: $coffeeProfit")
     }
 
 }
@@ -39,7 +47,11 @@ class PizzaPeter(
     override fun drinkSale() {
         println("would you like some coffee?")
         println("1. Sure\n2. I wouldn't, thanks")
-        if (readln() == "1") println("The price is 3$")
+        if (readln() == "1") {
+            soldCoffee++
+            coffeeProfit += 3
+            println("The price is 3$")
+        }
     }
     override fun neapolitanPizzaSale() {
         neapolitanPizzaCount++
@@ -68,7 +80,11 @@ class PizzaMoscow(
     override fun showCheckPhoto() {
         println("Do you have a check photo?")
         println("1. I do\n2. No")
-        if (readln() == "1") println("You will have price down at 0.7$")
+        if (readln() == "1") {
+            shownCheck++
+            discountSum += 0.7
+            println("You will have price down at 0.7$")
+        }
     }
     override fun neapolitanPizzaSale() {
         neapolitanPizzaCount++
